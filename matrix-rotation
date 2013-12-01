@@ -1,0 +1,40 @@
+#include<iostream>
+using namespace std;
+void rotatematrix(int matrix[][3], int n)
+{
+	for(int layer = 0; layer<n/2; ++layer)
+	{
+		int first = layer;
+		int last = n-1-layer;
+		for( int i = first; i < last ; ++i  )
+		{
+			int offset = i - first;
+			int top = matrix[first][i];
+			//top<-left
+			matrix[first][i] = matrix[last-offset][first];
+			//left<-bottom
+			matrix[last-offset][first] = matrix[last][last - offset];
+			//bottom<-right
+			matrix[last][last - offset] = matrix[i][last];
+			matrix[i][last] = top;
+		
+		}
+	}
+
+}
+
+
+int main()
+{
+	int n=3;
+	int matri[3][3]={{1,2,3},{4,5,6},{7,8,9}};
+	
+	rotatematrix(matri,n);
+	for(int i=0;i<3;i++)
+		{
+			for(int j=0;j<3;j++)
+			cout<<matri[i][j];
+			cout<<endl;
+		}
+	return 0;
+}
