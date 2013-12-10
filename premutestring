@@ -1,0 +1,21 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+void RecPermute(string soFar, string rest)
+{
+ if (rest.empty()) {
+ cout << soFar << endl;
+ } else {
+ for (unsigned int i = 0; i < rest.length(); i++) {
+	string remaining = rest.substr(0, i)+ rest.substr(i+1);
+	RecPermute(soFar + rest[i], remaining);
+	}
+ }
+}
+
+int main()
+{
+	RecPermute(" ","abc");
+	return 0;
+}
