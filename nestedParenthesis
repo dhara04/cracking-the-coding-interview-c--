@@ -1,0 +1,40 @@
+#include<string>
+#include<iostream>
+#include<set>
+using namespace std;
+
+void nestedParenthesis(set<string>&paren, int n)
+{
+	if(n == 1)	{
+		paren.insert("()");
+		return;
+	}
+	nestedParenthesis(paren,n-1);
+	set<string> tempara;
+	for(set<string>::iterator it = paren.begin();it !=paren.end();it++ ){
+		string temp = *it;
+		tempara.insert("()"+ temp);
+		unsigned int i =0;
+		while(i<temp.length()){
+			if(temp[i] == '('){
+				tempara.insert(temp.substr(0,i+1)+"()"+temp.substr(i+1));
+			}
+			i++;
+		}
+	}
+	//copy tempara to paren
+	for(set<string>::iterator it = tempara.begin();it !=tempara.end();it++ ){
+		paren.insert(*it);
+	}
+	
+}
+
+int main()
+{
+	int n= 3;
+	set<string> paren;
+	nestedParenthesis(paren,n);
+	for(set<string>::iterator vit = paren.begin();vit != paren.end();vit++)
+		cout<<*vit<<endl;
+	return 0;
+}
