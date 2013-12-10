@@ -22,6 +22,8 @@ void nestedParenthesis(set<string>&paren, int n)
 			i++;
 		}
 	}
+	//for n=3 , the output is :((())), (() ()), (()) (), () (()), () () ()
+	paren.clear();
 	//copy tempara to paren
 	for(set<string>::iterator it = tempara.begin();it !=tempara.end();it++ ){
 		paren.insert(*it);
