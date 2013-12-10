@@ -1,0 +1,220 @@
+//remove duplicate characters 
+#include<iostream>
+
+struct Node{
+	int data;
+	struct Node* link;
+};
+
+class SLL{
+	Node* head ;
+public:
+	SLL(){
+		head = NULL;
+	}
+	~SLL()
+	{
+		
+	}
+	
+	/*void AddNode(char val);*/
+	void AddNode(int val);
+	/*void DeleteNode(char val);*/
+	/*void DeleteNode(int val);*/
+	void DeletelastNodewithouthead();
+	void RemoveDuplicates();
+	void PrintList();
+	/*void Search(char val);*/
+	/*void Search(int val);*/
+	void FindkthtoLastelem(int k);
+	void init(int a[],int n);
+	void Partition(int x);
+};
+//15,1,10,3,5->1,3,5,10,15
+//	obj.Partition(6);
+//void SLL::Partition(int x)
+//{
+//	Node*beg=head,*cur=head,*next=head;
+//	
+//	while(cur != NULL ){
+//		if(cur->data < x)	{
+//			cur = cur->link;
+//
+//		}	
+//	}
+//		if(next->)
+//	}
+//}
+void SLL::init(int a[],int n)
+{
+	for( int i = 0; i < n; i++ ){
+		this->AddNode(a[i]);
+	}
+}
+//void SLL::AddNode(char val){
+//	//If the list is empty
+//	 if( head == NULL){
+//		 head = new Node();
+//		 head->data = val;
+//		 head->link = NULL;
+//	 }
+//	 else{
+//		 Node* curr=new Node();
+//		 curr->data = val;
+//		 curr->link = NULL;
+//		 //adding new nodes to front ,so the values get added in reverse order
+//		 curr->link=head;
+//		 head = curr;
+//	 }
+//}
+
+void SLL::AddNode(int val){
+	//If the list is empty
+	 if( head == NULL){
+		 head = new Node();
+		 head->data = val;
+		 head->link = NULL;
+	 }
+	 else{
+		 Node* curr=new Node();
+		 curr->data = val;
+		 curr->link = NULL;
+		 //adding new nodes to front ,so the values get added in reverse order
+		 curr->link=head;
+		 head = curr;
+	 }
+}
+
+//void SLL::DeleteNode(char val){
+//	//print linked list is empty if head is empty
+//	if(head == NULL)	std::cout<<"List is empty ";
+//	Node* cur = head;
+//	/*If the value matches the first node in linked list*/
+//	if(head->data == val)	{head = cur->link; delete cur; cur = NULL;}
+//	Node* prev =cur;
+//	while(cur != NULL){
+//		cur = cur->link;
+//		if(val == cur->data){
+//			//if value matches the last node in the linked list
+//			if(cur->link == NULL)	{prev->link = NULL; delete cur; return;}
+//			prev->link=cur->link;
+//			delete cur;
+//			return;
+//		}
+//		prev=prev->link;
+//	}
+//	delete prev;
+//}
+
+void SLL::DeletelastNodewithouthead(){
+	Node*temp=head,*prev=head;
+	while( head != NULL )	
+	{	prev = head;
+		head = head->link;		
+	}
+	/*DeleteNode(head->data);*/
+}
+
+void SLL::RemoveDuplicates()
+{
+	Node* cur = head,*next=head,*prev=head;
+	while(cur != NULL)
+	{
+		prev = cur;
+		next = cur->link;
+		while( next != NULL )
+		{
+			if( cur->data == next->data )
+			{
+				Node* t = next;
+				prev->link = next->link;
+				next = prev->link;
+				delete t;
+			}
+			else{
+			prev = prev->link;
+			next = next->link;
+			}
+		}
+		cur = cur->link;
+	}
+	
+}
+void SLL::FindkthtoLastelem(int k){
+	////Implementation-1
+	//Node*a = head;
+	//int count = 0;
+	//while( a != NULL )
+	//{
+	//	a=a->link;
+	//	count++;
+	//}
+	//int i = 0;
+	//a = head;
+	//while(i < count-k){
+	//	a=a->link;
+	//	i++;
+	//}
+	//std::cout<<a->data;
+	//better implementation
+	Node*a=head,*b=head;
+	int count = 0;
+	while(count< k-1){
+		a=a->link;
+		count++;
+	}
+	if(a->link == NULL)	{std::cout<<b->data;return;}
+	while(a->link!=NULL)
+	{
+		b=b->link;
+		a=a->link;
+	}
+	std::cout<<b->data;
+}
+void SLL::PrintList(){
+	Node* cur = head;
+	while(cur != NULL)
+	{
+		std::cout<<cur->data<<"\t";
+		cur = cur->link;
+	}
+	delete cur;
+}
+//void SLL::Search(char val){
+//}
+int main()
+{
+	SLL obj,obj1;
+	int n =5;
+	int a[5]={5,3,10,1,15};
+	obj1.init(a,n);
+	////test -case1
+	//obj.AddNode('a');
+	//obj.AddNode('a');
+	////test-case-2
+	//obj.AddNode('c');
+	//obj.AddNode('a');
+	//obj.AddNode('a');
+	//obj.AddNode('b');
+	//obj.AddNode('c');
+	//obj.AddNode('c');
+	//obj.AddNode(' ');
+	////tc-3
+	//obj.AddNode('a');
+	////tc-4
+	//obj.AddNode('b');
+	
+	//tc-5-No nodes addes
+	obj1.PrintList();
+	std::cout<<"\n";
+	//15,1,10,3,5->1,3,5,10,15
+	/*obj.Partition(6);*/
+	/*obj.DeleteNode('a');
+	obj.PrintList();*/
+	/*obj.DeleteNode('b');*/
+	/*obj.RemoveDuplicates();*/
+	//obj.FindkthtoLastelem(3);
+//	obj.DeletelastNodewithouthead();
+	/*obj.PrintList();*/
+	return 0;
+}
