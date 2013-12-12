@@ -1,3 +1,5 @@
+//Anagram needs to be a word in the dictionary hence the follwing code needs to be changed 
+
 //there are 2 ways to solve the problem 
 //1 sort the strings and compare them or calculate the count of each character and compare those counts 
 #include<string>
